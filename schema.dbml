@@ -1,0 +1,175 @@
+Project simguru {
+    database_type: 'PostgreSQL'
+    Note: 'Asset management app'
+}
+
+// Enums
+enum room_category {
+  classroom
+  laboratory
+  office
+  hall
+  storage
+}
+
+enum asset_type {
+  electronic
+  furniture
+  vehicle
+  machinery
+}
+
+enum slo_status {
+  pending
+  approved
+  rejected
+  expired
+}
+
+enum validation_condition {
+    baik
+    rusak_ringan
+    rusak_berat
+}
+
+enum module {
+    etl
+    backoffice
+    maintenance
+    booking
+    rent
+}
+
+enum sync_status {
+    unsynchronized
+    synchronizing
+    synchronized
+    error
+}
+
+// Entities / Tables
+Table roles {
+  id varchar [pk]
+  name varchar
+  code varchar
+  description text
+}
+
+Table users {
+  id varchar [pk]
+  role_id varchar
+  name varchar
+  email varchar [unique]
+  password varchar
+}
+
+Table campuses {
+  id varchar [pk]
+  name varchar
+  address text
+  area_size integer
+  contact varchar
+  description text
+}
+
+Table buildings {
+  id varchar [pk]
+  campus_id varchar
+  name varchar
+  building_area integer
+  land_area integer
+  total_floors integer
+  description text
+}
+
+Table rooms {
+  id varchar [pk]
+  building_id varchar
+  floor integer
+  length integer
+  width integer
+  height integer
+  capacity integer
+  description text
+  category room_category
+}
+
+Table assets {
+  id varchar [pk]
+  building_id varchar
+  name varchar
+  brand varchar
+  type asset_type
+  purchase_price integer
+  barcode varchar [unique]
+}
+
+Table slo_certificates {
+  id varchar [pk]
+  user_id varchar
+  asset_id varchar
+  slo_code varchar
+  name varchar
+  status slo_status
+}
+
+Table slo_validations {
+  id varchar [pk]
+  certificate_id varchar [unique]
+  image varchar
+  estimated_repair_cost integer
+  requires_power_outage boolean
+  condition validation_condition
+}
+
+Table slo_checklist_items {
+    id varchar [pk]
+    asset_id varchar
+    indicator varchar
+}
+
+Table slo_validation_checks {
+    id varchar [pk]
+    checklist_items_id varchar
+    validation_id varchar
+    is_passed boolean
+}
+
+Table maintenance_logs {
+    id varchar [pk]
+    technician_id varchar
+    slo_validations_id varchar [unique]
+    inspection_code varchar
+    action_taken varchar
+    repair_cost integer
+}
+
+Table activity_logs {
+    id varchar [pk]
+    user_id varchar
+    module module
+    action varchar
+    description varchar
+}
+
+Table synchronizations {
+    id varchar [pk]
+    name varchar
+    endpoint varchar
+    status sync_status
+}
+
+// Relationships
+Ref: users.role_id > roles.id
+Ref: slo_certificates.user_id > users.id
+Ref: buildings.campus_id > campuses.id
+Ref: rooms.building_id > buildings.id
+Ref: assets.building_id > buildings.id
+Ref: slo_certificates.asset_id > assets.id
+Ref: slo_validations.certificate_id - slo_certificates.id
+Ref: slo_checklist_items.asset_id > assets.id
+Ref: slo_validation_checks.checklist_items_id > slo_checklist_items.id
+Ref: slo_validation_checks.validation_id > slo_validations.id
+Ref: maintenance_logs.technician_id > users.id
+Ref: maintenance_logs.slo_validations_id - slo_validations.id
+Ref: activity_logs.user_id > users.id
