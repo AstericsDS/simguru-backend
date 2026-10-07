@@ -46,5 +46,38 @@ router
 				router.delete('/:id', [controllers.Roles, 'destroy'])
 			})
 			.prefix('roles')
+    
+      // Campuses
+      router
+        .group(() => {
+          router.get('/', [controllers.Campuses, 'index']),
+          router.get('/:id', [controllers.Campuses, 'show']),
+          router.post('/', [controllers.Campuses, 'store']),
+          router.put('/:id', [controllers.Campuses, 'update']),
+          router.delete('/:id', [controllers.Campuses, 'destroy'])
+        })
+        .prefix('campuses')
+
+      // Buildings
+      router
+        .group(() => {
+          router.get('/', [controllers.Buildings, 'index']),
+          router.get('/:id', [controllers.Buildings, 'show']),
+          router.post('/', [controllers.Buildings, 'store']),
+          router.put('/:id', [controllers.Buildings, 'update']),
+          router.delete('/:id', [controllers.Buildings, 'destroy'])
+        })
+        .prefix('buildings')
+
+      // Rooms
+      router
+        .group(() => {
+          router.get('/', [controllers.Rooms, 'index']),
+          router.get('/:id', [controllers.Rooms, 'show']),
+          router.post('/', [controllers.Rooms, 'store']),
+          router.put('/:id', [controllers.Rooms, 'update']),
+          router.delete('/:id', [controllers.Rooms, 'destroy'])
+        })
+        .prefix('rooms')
   })
   .prefix('/api/v1')
