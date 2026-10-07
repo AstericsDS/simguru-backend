@@ -8,8 +8,7 @@ enum room_category {
   classroom
   laboratory
   office
-  hall
-  storage
+  auditorium
 }
 
 enum asset_type {

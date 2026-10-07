@@ -5,7 +5,10 @@
 
 export const controllers = {
   AccessTokens: () => import('#controllers/access_tokens_controller'),
+  Buildings: () => import('#controllers/buildings_controller'),
+  Campuses: () => import('#controllers/campuses_controller'),
   NewAccount: () => import('#controllers/new_account_controller'),
   Profile: () => import('#controllers/profile_controller'),
   Roles: () => import('#controllers/roles_controller'),
+  Rooms: () => import('#controllers/rooms_controller'),
 }

@@ -32,6 +32,50 @@ export class AuthAccessTokenSchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
+export class BuildingSchema extends BaseModel {
+  static $columns = ['buildingArea', 'campusId', 'createdAt', 'description', 'id', 'landArea', 'name', 'totalFloors', 'updatedAt'] as const
+  $columns = BuildingSchema.$columns
+  @column()
+  declare buildingArea: number | null
+  @column()
+  declare campusId: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column()
+  declare description: string | null
+  @column({ isPrimary: true })
+  declare id: string
+  @column()
+  declare landArea: number | null
+  @column()
+  declare name: string | null
+  @column()
+  declare totalFloors: number | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class CampusSchema extends BaseModel {
+  static $columns = ['address', 'areaSize', 'contact', 'createdAt', 'description', 'id', 'name', 'updatedAt'] as const
+  $columns = CampusSchema.$columns
+  @column()
+  declare address: string | null
+  @column()
+  declare areaSize: number | null
+  @column()
+  declare contact: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column()
+  declare description: string | null
+  @column({ isPrimary: true })
+  declare id: string
+  @column()
+  declare name: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class RoleSchema extends BaseModel {
   static $columns = ['code', 'createdAt', 'description', 'id', 'name', 'updatedAt'] as const
   $columns = RoleSchema.$columns
@@ -47,6 +91,33 @@ export class RoleSchema extends BaseModel {
   declare name: string | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+}
+
+export class RoomSchema extends BaseModel {
+  static $columns = ['buildingId', 'capacity', 'category', 'createdAt', 'description', 'floor', 'height', 'id', 'length', 'updatedAt', 'width'] as const
+  $columns = RoomSchema.$columns
+  @column()
+  declare buildingId: string
+  @column()
+  declare capacity: number | null
+  @column()
+  declare category: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column()
+  declare description: string | null
+  @column()
+  declare floor: number | null
+  @column()
+  declare height: number | null
+  @column({ isPrimary: true })
+  declare id: string
+  @column()
+  declare length: number | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare width: number | null
 }
 
 export class UserSchema extends BaseModel {
