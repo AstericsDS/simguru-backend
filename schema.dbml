@@ -84,6 +84,7 @@ Table buildings {
 Table rooms {
   id varchar [pk]
   building_id varchar
+  name varchar
   floor integer
   length integer
   width integer
