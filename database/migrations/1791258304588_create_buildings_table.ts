@@ -13,6 +13,7 @@ export default class extends BaseSchema {
       table.integer('land_area')
       table.integer('total_floors')
       table.text('description')
+      table.unique(['campus_id', 'name'])
 
       table.timestamp('created_at')
       table.timestamp('updated_at')

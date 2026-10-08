@@ -8,6 +8,7 @@ export default class extends BaseSchema {
       table.uuid('id').primary()
       table.uuid('building_id').notNullable()
       table.foreign('building_id').references('buildings.id')
+      table.string('name');
       table.integer('floor')
       table.integer('length')
       table.integer('width')
@@ -15,6 +16,7 @@ export default class extends BaseSchema {
       table.integer('capacity')
       table.text('description')
       table.enum('category', ['classroom', 'laboratory', 'office', 'auditorium'])
+      table.unique(['building_id', 'name'])
 
       table.timestamp('created_at')
       table.timestamp('updated_at')

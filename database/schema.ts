@@ -94,7 +94,7 @@ export class RoleSchema extends BaseModel {
 }
 
 export class RoomSchema extends BaseModel {
-  static $columns = ['buildingId', 'capacity', 'category', 'createdAt', 'description', 'floor', 'height', 'id', 'length', 'updatedAt', 'width'] as const
+  static $columns = ['buildingId', 'capacity', 'category', 'createdAt', 'description', 'floor', 'height', 'id', 'length', 'name', 'updatedAt', 'width'] as const
   $columns = RoomSchema.$columns
   @column()
   declare buildingId: string
@@ -114,6 +114,8 @@ export class RoomSchema extends BaseModel {
   declare id: string
   @column()
   declare length: number | null
+  @column()
+  declare name: string | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
   @column()
