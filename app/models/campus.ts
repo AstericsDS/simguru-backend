@@ -2,7 +2,7 @@ import { CampusSchema } from '#database/schema'
 import { beforeCreate, hasMany, column } from '@adonisjs/lucid/orm'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
 import { randomUUID } from 'node:crypto'
-import Building from '#models/building'
+import Building from './building.ts'
 
 export default class Campus extends CampusSchema {
   @column({ isPrimary: true })

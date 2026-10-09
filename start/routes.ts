@@ -35,6 +35,8 @@ router
       .prefix('account')
       .as('profile')
       .use(middleware.auth())
+      
+    router.get('/', [controllers.Profile, 'index']).prefix('users')
 
     // Roles
 		router
@@ -79,5 +81,80 @@ router
           router.delete('/:id', [controllers.Rooms, 'destroy'])
         })
         .prefix('rooms')
+
+      // Assets
+      router
+        .group(() => {
+          router.get('/', [controllers.Assets, 'index']),
+          router.get('/:id', [controllers.Assets, 'show']),
+          router.post('/', [controllers.Assets, 'store']),
+          router.put('/:id', [controllers.Assets, 'update']),
+          router.delete('/:id', [controllers.Assets, 'destroy'])
+        })
+        .prefix('assets')
+
+      // Maintenance Logs
+      router
+        .group(() => {
+          router.get('/', [controllers.MaintenanceLogs, 'index']),
+          router.get('/:id', [controllers.MaintenanceLogs, 'show']),
+          router.post('/', [controllers.MaintenanceLogs, 'store'])
+        })
+        .prefix('maintenance-logs')
+
+      // SLO Certificates
+      router
+        .group(() => {
+          router.get('/', [controllers.SloCertificates, 'index']),
+          router.get('/:id', [controllers.SloCertificates, 'show']),
+          router.post('/', [controllers.SloCertificates, 'store']),
+          router.put('/:id', [controllers.SloCertificates, 'update']),
+          router.delete('/:id', [controllers.SloCertificates, 'destroy'])
+        })
+        .prefix('slo-certificates')
+
+      // SLO Checklist Items
+      router
+        .group(() => {
+          router.get('/', [controllers.SloChecklistItems, 'index']),
+          router.get('/:id', [controllers.SloChecklistItems, 'show']),
+          router.post('/', [controllers.SloChecklistItems, 'store']),
+          router.put('/:id', [controllers.SloChecklistItems, 'update']),
+          router.delete('/:id', [controllers.SloChecklistItems, 'destroy'])
+        })
+        .prefix('slo-checklist-items')
+
+      // SLO Validations
+      router
+        .group(() => {
+          router.get('/', [controllers.SloValidations, 'index']),
+          router.get('/:id', [controllers.SloValidations, 'show']),
+          router.post('/', [controllers.SloValidations, 'store']),
+          router.put('/:id', [controllers.SloValidations, 'update']),
+          router.delete('/:id', [controllers.SloValidations, 'destroy'])
+        })
+        .prefix('slo-validations')
+
+      // SLO Validation Checks
+      router
+        .group(() => {
+          router.get('/', [controllers.SloValidationChecks, 'index']),
+          router.get('/:id', [controllers.SloValidationChecks, 'show']),
+          router.post('/', [controllers.SloValidationChecks, 'store']),
+          router.put('/:id', [controllers.SloValidationChecks, 'update']),
+          router.delete('/:id', [controllers.SloValidationChecks, 'destroy'])
+        })
+        .prefix('slo-validation-checks')
+
+      // SLO Validation Images
+      router
+        .group(() => {
+          router.get('/', [controllers.SloValidationImages, 'index']),
+          router.get('/:id', [controllers.SloValidationImages, 'show']),
+          router.post('/', [controllers.SloValidationImages, 'store']),
+          router.put('/:id', [controllers.SloValidationImages, 'update']),
+          router.delete('/:id', [controllers.SloValidationImages, 'destroy'])
+        })
+        .prefix('slo-validation-images')
   })
   .prefix('/api/v1')

@@ -1,10 +1,9 @@
 import { BuildingSchema } from '#database/schema'
-import Room from '#models/room'
+import Room from './room.ts'
+import Campus from './campus.ts'
 import { beforeCreate, hasMany, column, belongsTo } from '@adonisjs/lucid/orm'
-import type { HasMany } from '@adonisjs/lucid/types/relations'
+import type { HasMany, BelongsTo } from '@adonisjs/lucid/types/relations'
 import { randomUUID } from 'node:crypto'
-import type { BelongsTo } from '@adonisjs/lucid/types/relations'
-import Campus from '#models/campus'
 
 export default class Building extends BuildingSchema {
   @column({ isPrimary: true })
@@ -13,11 +12,11 @@ export default class Building extends BuildingSchema {
   @hasMany(() => Room)
   declare rooms: HasMany<typeof Room>
 
+  @belongsTo(() => Campus)
+  declare campus: BelongsTo<typeof Campus>
+
   @beforeCreate()
   static assignUuid(model: Building) {
     model.id = model.id || randomUUID()
   }
-
-  @belongsTo(() => Campus)
-  declare campus: BelongsTo<typeof Campus>
 }
