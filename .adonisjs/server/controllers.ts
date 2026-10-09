@@ -5,10 +5,17 @@
 
 export const controllers = {
   AccessTokens: () => import('#controllers/access_tokens_controller'),
+  Assets: () => import('#controllers/assets_controller'),
   Buildings: () => import('#controllers/buildings_controller'),
   Campuses: () => import('#controllers/campuses_controller'),
+  MaintenanceLogs: () => import('#controllers/maintenance_logs_controller'),
   NewAccount: () => import('#controllers/new_account_controller'),
   Profile: () => import('#controllers/profile_controller'),
   Roles: () => import('#controllers/roles_controller'),
   Rooms: () => import('#controllers/rooms_controller'),
+  SloCertificates: () => import('#controllers/slo_certificates_controller'),
+  SloChecklistItems: () => import('#controllers/slo_checklist_items_controller'),
+  SloValidationChecks: () => import('#controllers/slo_validation_checks_controller'),
+  SloValidationImages: () => import('#controllers/slo_validation_images_controller'),
+  SloValidations: () => import('#controllers/slo_validations_controller'),
 }

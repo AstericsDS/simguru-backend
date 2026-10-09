@@ -7,6 +7,29 @@
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
+export class AssetSchema extends BaseModel {
+  static $columns = ['assetType', 'barcode', 'brand', 'createdAt', 'id', 'name', 'purchasePrice', 'roomId', 'updatedAt'] as const
+  $columns = AssetSchema.$columns
+  @column()
+  declare assetType: string | null
+  @column()
+  declare barcode: string | null
+  @column()
+  declare brand: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: string
+  @column()
+  declare name: string | null
+  @column()
+  declare purchasePrice: number | null
+  @column()
+  declare roomId: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class AuthAccessTokenSchema extends BaseModel {
   static $columns = ['abilities', 'createdAt', 'expiresAt', 'hash', 'id', 'lastUsedAt', 'name', 'tokenableId', 'type', 'updatedAt'] as const
   $columns = AuthAccessTokenSchema.$columns
@@ -76,6 +99,27 @@ export class CampusSchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
+export class MaintenanceLogSchema extends BaseModel {
+  static $columns = ['actionTaken', 'createdAt', 'id', 'inspectionCode', 'repairCost', 'sloValidationId', 'technicianId', 'updatedAt'] as const
+  $columns = MaintenanceLogSchema.$columns
+  @column()
+  declare actionTaken: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: string
+  @column()
+  declare inspectionCode: string | null
+  @column()
+  declare repairCost: number | null
+  @column()
+  declare sloValidationId: string | null
+  @column()
+  declare technicianId: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class RoleSchema extends BaseModel {
   static $columns = ['code', 'createdAt', 'description', 'id', 'name', 'updatedAt'] as const
   $columns = RoleSchema.$columns
@@ -120,6 +164,93 @@ export class RoomSchema extends BaseModel {
   declare updatedAt: DateTime | null
   @column()
   declare width: number | null
+}
+
+export class SloCertificateSchema extends BaseModel {
+  static $columns = ['assetId', 'createdAt', 'id', 'name', 'sloCode', 'status', 'updatedAt', 'userId'] as const
+  $columns = SloCertificateSchema.$columns
+  @column()
+  declare assetId: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: string
+  @column()
+  declare name: string | null
+  @column()
+  declare sloCode: string | null
+  @column()
+  declare status: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare userId: string
+}
+
+export class SloChecklistItemSchema extends BaseModel {
+  static $columns = ['assetId', 'createdAt', 'id', 'indicator', 'updatedAt'] as const
+  $columns = SloChecklistItemSchema.$columns
+  @column()
+  declare assetId: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: string
+  @column()
+  declare indicator: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class SloValidationSchema extends BaseModel {
+  static $columns = ['condition', 'createdAt', 'estimatedRepairCost', 'id', 'requiresPowerOutage', 'sloCertificateId', 'updatedAt'] as const
+  $columns = SloValidationSchema.$columns
+  @column()
+  declare condition: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column()
+  declare estimatedRepairCost: number | null
+  @column({ isPrimary: true })
+  declare id: string
+  @column()
+  declare requiresPowerOutage: boolean | null
+  @column()
+  declare sloCertificateId: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class SloValidationCheckSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'isPassed', 'sloChecklistItemId', 'sloValidationId', 'updatedAt'] as const
+  $columns = SloValidationCheckSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: string
+  @column()
+  declare isPassed: boolean | null
+  @column()
+  declare sloChecklistItemId: string | null
+  @column()
+  declare sloValidationId: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class SloValidationImageSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'path', 'sloValidationId', 'updatedAt'] as const
+  $columns = SloValidationImageSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: string
+  @column()
+  declare path: string | null
+  @column()
+  declare sloValidationId: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
 }
 
 export class UserSchema extends BaseModel {
